@@ -15,12 +15,11 @@ router.post("/", async (req, res) => {
       model: "gpt-image-1",
       prompt,
       size: "1024x1024",
-      response_format: "b64_json",
     });
 
-    const imageBase64 = result.data[0].b64_json;
+    const imageUrl = result.data[0].url;
 
-    res.status(200).json({ photo: imageBase64 });
+    res.status(200).json({ photo: imageUrl });
   } catch (error) {
     console.error("DALL·E Error:", error);
     res.status(500).json({ error: error.message || "Generation failed" });
